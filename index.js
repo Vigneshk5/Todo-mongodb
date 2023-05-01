@@ -1,12 +1,11 @@
 /** @format */
-const fs = require("fs");
-const http = require("http");
 
-const server = http.createServer((req, res) => {
-  res.write("<h1>hello</h1>");
-  res.end();
+const express = require("express");
+const path = require("path");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "public/index.html"));
 });
 
-server.listen(3001, () => {
-  console.log("running");
-});
+app.listen(3000);
