@@ -1,6 +1,12 @@
 /** @format */
 const fs = require("fs");
-const { createFile } = require("./util");
-createFile("note.txt", "hello there");
+const http = require("http");
 
-console.log(fs.readdirSync("."));
+const server = http.createServer((req, res) => {
+  res.write("<h1>hello</h1>");
+  res.end();
+});
+
+server.listen(3001, () => {
+  console.log("running");
+});
