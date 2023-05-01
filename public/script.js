@@ -1,13 +1,13 @@
 /** @format */
 
 document.getElementById("submit").onclick = () => {
-  const username = document.getElementById("username");
-  const password = document.getElementById("password");
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
 
   fetch("/data", {
-    method: "post",
+    method: "POST",
     headers: {
-      contenttype: "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       username,

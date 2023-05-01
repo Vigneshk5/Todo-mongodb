@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 app.use("/", express.static(path.resolve(__dirname, "public")));
 
 app.post("/data", (req, res) => {
+  console.log(req.body);
   res.json({ status: "ok" });
 });
 
