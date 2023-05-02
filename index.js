@@ -1,16 +1,23 @@
 /** @format */
+require("dotenv").config();
+const { MongoClient } = require("mongodb");
+const uri = `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASS}@cluster0.hnd64n8.mongodb.net/?retryWrites=true&w=majority`;
 
-const express = require("express");
-const path = require("path");
-const bodyParser = require("body-parser");
+const client = new MongoClient(uri);
 
-const app = express();
-app.use(bodyParser.json());
-app.use("/", express.static(path.resolve(__dirname, "public")));
+async function run() {
+  try {
+    const database = client.db("sample_mflix");
+    const movies = database.collection("movies");
 
-app.post("/data", (req, res) => {
-  console.log(req.body);
-  res.json({ status: "ok" });
-});
+    // Query for a movie that has the title 'Back to the Future'
+    const query = { title: "Back to the Future" };
+    const movie = await movies.findOne(query);
 
-app.listen(3000);
+    console.log(movie);
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
