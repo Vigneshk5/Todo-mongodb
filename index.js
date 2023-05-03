@@ -2,9 +2,6 @@
 require("dotenv").config();
 
 const mongoose = require("mongoose");
-// const { MongoClient } = require("mongodb");
-// const uri = `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASS}@cluster0.hnd64n8.mongodb.net/?retryWrites=true&w=majority`;
-// const client = new MongoClient(uri);
 
 main().catch((err) => console.log(err));
 
@@ -12,15 +9,19 @@ async function main() {
   await mongoose.connect(
     `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASS}@cluster0.hnd64n8.mongodb.net/?retryWrites=true&w=majority/test`
   );
+  try {
+    const kittySchema = new mongoose.Schema({
+      name: String,
+    });
 
-  const kittySchema = new mongoose.Schema({
-    name: String,
-  });
+    const Kitten = mongoose.model("Kitten", kittySchema);
 
-  const Kitten = mongoose.model("Kitten", kittySchema);
-
-  const silence = new Kitten({ name: "Silence" });
-  console.log(silence.name);
+    const silence = new Kitten({ name: "Silence" });
+    console.log(silence.name);
+  } finally {
+    // await kitten.close();
+    console.log("end");
+  }
 }
 
 // async function run() {
