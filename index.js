@@ -18,6 +18,8 @@ async function main() {
 
     const silence = new Kitten({ name: "Silence" });
     await silence.save();
+    const suresha = new Kitten({ name: "Suresha" });
+    await suresha.save();
     console.log(silence.name);
   } finally {
     // await kitten.close();
