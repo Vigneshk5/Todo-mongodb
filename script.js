@@ -1,7 +1,15 @@
 /** @format */
 require("dotenv").config();
-
+const express = require("express");
+const path = require("path");
+const app = express();
 const mongoose = require("mongoose");
+
+app.use("/", express.static(path.resolve(__dirname, "assets")));
+
+app.listen(13371, () => {
+  console.log("...server up");
+});
 
 main().catch((err) => console.log(err));
 
