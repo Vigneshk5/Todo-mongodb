@@ -40,8 +40,7 @@ class item {
   }
 
   async edit(input) {
-    const newInput = prompt("Enter new msg:", input);
-    input.value = newInput;
+    const newInput = prompt("Enter new msg:", input.value);
     await fetch("/api/modify", {
       method: "POST",
       body: JSON.stringify({ old: input.value, new: newInput }),
@@ -49,6 +48,7 @@ class item {
         "Content-Type": "application/json",
       },
     });
+    input.value = newInput;
   }
 
   async remove(item, value) {

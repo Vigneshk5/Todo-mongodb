@@ -7,9 +7,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const Todo = require("./models/todo");
 
-mongoose.connect(
-  `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASS}@cluster0.hnd64n8.mongodb.net/?retryWrites=true&w=majority`
-);
+mongoose.connect(`mongodb://localhost:27017`);
 
 app.use("/", express.static(path.resolve(__dirname, "assets")));
 
@@ -22,17 +20,21 @@ app.post("/api/delete", async (req, res) => {
 });
 
 app.post("/api/modify", async (req, res) => {
-  const { old: oldInput, new: newInput } = req.body;
+  const { old: oldTitle, new: newTitle } = req.body;
+
   const response = await Todo.updateOne(
     {
-      record: oldInput,
+      record: oldTitle,
     },
     {
       $set: {
-        record: newInput,
+        record: newTitle,
       },
     }
   );
+
+  console.log(response);
+
   res.json({ status: "ok" });
 });
 
