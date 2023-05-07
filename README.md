@@ -2,10 +2,6 @@
 
 # Todo App with NodeJS & MongoDB
 
-'![not found](https://photos.app.goo.gl/KVJSCzQWX3jJTXrw9)'
-
-'[not found](https://photos.app.goo.gl/1jWiPNqHsLoGjBzZ6)'
-
 ## Overview
 
 This is a simple todo app that allows you to create, edit, and delete tasks. It is built using HTML, CSS, and JavaScript on the frontend, and Node.js and MongoDB on the backend.
